@@ -1,0 +1,66 @@
+#!/bin/sh
+# For evaluation of the trained UNET we have to use the compute node
+# The normal RAM on the GPU cluster isn't enough for some reason
+
+# Set a time limit for the job; default is 72 hours
+# Lower time limits MAY be run faster? Not sure
+#SBATCH --time=01:00:00
+
+# number of nodes
+#SBATCH --nodes=1
+
+# Can request up to 32 tasks (cores) per node 
+#SBATCH --ntasks-per-node=8
+
+# Memory per node specification is in MB. It is optional. 
+# The default limit is 3000MB per core.
+# There is 192GB of RAM in the GPU partition
+#SBATCH --mem=100000
+
+# Name of the job in the queue
+#SBATCH --job-name="slurm-unet-eval"
+
+# Name of the log file, captures any console output
+#SBATCH --output=slurm-unet-eval-t0001.out
+
+# Who should receive mail about this job
+# PLEASE PLEASE PLEASE 
+# Change this so that I don't get spam-mailed about your jobs :)
+#SBATCH --mail-user=jwfolmsb@buffalo.edu
+
+# What type of mail should we get?
+# Options are "ALL" (Includes at least beginning and end of job) or "END" (just notifies on completion)
+#SBATCH --mail-type=END
+
+# Flag to specify to requeue a job after node failure
+#SBATCH --requeue
+
+# Debugging / Job info
+
+echo "Job Details"
+echo "==========="
+echo "SLURM_JOBID: "$SLURM_JOBID
+echo "SLURM_JOB_NODELIST: "$SLURM_JOB_NODELIST
+echo "SLURM_NNODES: "$SLURM_NNODES
+echo "SLURMTMPDIR: "$SLURMTMPDIR
+echo "Working Directory: "$SLURM_SUBMIT_DIR
+echo " "
+
+# Load modules here, and set the stack size to "unlimited" 
+# (this second line is based on the example slurm script, not sure whether 
+# this counts as proper best practice in this context)
+echo "Loading Modules"
+echo "==============="
+eval "$(/util/common/python/py37/anaconda-2020.02/bin/conda shell.bash hook)"
+conda activate OCC_Env
+echo " "
+
+# Finally, actually execute the code of the shell script. It's useful to 
+# include `echo` messages before and after programs so that their output can be
+# used in debugging (in case the program silently crashes or exits).
+
+echo "Running Programs"
+echo "================"
+
+# Run the code -- change this line in case you want to pass cmd-line parameters
+python src/evaluate.py

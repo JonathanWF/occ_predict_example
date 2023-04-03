@@ -1,0 +1,5 @@
+roi_number_orig,roi_number_modified,corresponding_wsi_number,notes,wsi_uploaded_histomics,gt_exists,gt_uploaded,gt_confirmed,top,left,width,height,mpp_roi,mpp_wsi,full height,full width,index
+110b,OCC-02-1110-01Z-02-O01,OCC-05-0002-01Z-02-O01,color channels in ROI flipped on Omero?,y,y,n,n,66260,42269,27422,17201,0.25,0.25,83508,122564,65
+113b,OCC-02-1113-01Z-02-O01,OCC-05-0005-01Z-02-O01,color channels in ROI flipped on Omero?,y,y,y,y,85819,7655,25741,17081,0.25,0.25,106471,136661,68
+118b,OCC-02-1118-01Z-02-O01,OCC-05-0010-01Z-01-O01,revised,y,y,y,n - coordinates off,35417,8654,29302,16941,0.25,0.25,111306,119140,73
+118a,OCC-02-1118-01Z-01-O01,OCC-05-0010-01Z-02-O01,color channels in ROI flipped on Omero?,y,y,y,y,84638,38854,25201,16721,0.25,0.25,94990,131425,75
